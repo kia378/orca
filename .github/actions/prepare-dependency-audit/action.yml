@@ -14,7 +14,10 @@ runs:
       run: |
         set -euo pipefail
         git -c credential.helper= -c 'credential.helper=!gh auth git-credential' fetch --no-tags --depth=1 origin "$RELEASE_REF"
-        mapfile -t files < <(git ls-tree -r FETCH_HEAD -- \
+        files=()
+        while IFS= read -r file; do
+          files+=("$file")
+        done < <(git ls-tree -r FETCH_HEAD -- \
           pnpm-lock.yaml pnpm-workspace.yaml mobile/pnpm-lock.yaml mobile/pnpm-workspace.yaml \
           native config/patches mobile/patches | \
           awk '$1 ~ /^100(644|755)$/ {sub(/^[^\t]*\t/, ""); print}' | \

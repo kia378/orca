@@ -10,6 +10,11 @@ const NODE_RUNTIME_INCLUDE = [
   'src/main/ssh/legacy-relay/endpoints/ssh-relay-endpoint-incumbent-shell.integration.test.ts',
   'src/main/ssh/remote-exec/ssh-remote-commands.test.ts',
   'src/packages/process-host/src/run-process.test.ts',
+  // Native spawn errors and fallback lifecycles must match Electron's Node runtime.
+  'src/packages/process-host/src/native-process-spawn.test.ts',
+  // These CLIs depend on Node's package resolution and filesystem permission handling.
+  'config/scripts/macos/terminal-host-bundle/macos-terminal-host-bundle.test.mjs',
+  'config/scripts/worktree-storage/reclaim-worktree-generated-files.test.mjs',
   'tests/e2e/cursor-quota-transport.unit.test.ts',
   'tests/e2e/helpers/electron-process-shutdown.unit.test.ts',
   // The parse cache persists through node:sqlite.
